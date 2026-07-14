@@ -1,6 +1,7 @@
-const PRIMARY_SELECTORS = ['.hero__waterfall', '.videoScreen__mainVideo'] as const;
-const SECONDARY_SELECTOR =
-  '.videoScreen__bgVideo, .invisibleScreen__bgVideo, .supportScreen__video, .footerVideo';
+// const PRIMARY_SELECTORS = ['.hero__waterfall', '.videoScreen__mainVideo'] as const;
+const PRIMARY_SELECTORS = [] as const;
+const SECONDARY_SELECTOR = '';
+  // '.videoScreen__bgVideo, .invisibleScreen__bgVideo, .supportScreen__video, .footerVideo';
 
 import { syncDecorativeVideoPlayback } from './videoVisibilityPlayback';
 

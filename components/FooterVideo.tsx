@@ -14,12 +14,12 @@ export function FooterVideo({ deferred = false }: { deferred?: boolean }) {
       autoPlay
       loop
       playsInline
-      preload={deferred ? 'none' : undefined}
+      // preload={deferred ? 'none' : undefined}
       poster="/placeholders/footer_v1_placeholder.webp"
     >
       {sources.map((source) =>
         deferred ? (
-          <source key={source.url} data-deferred-src={source.url} type={source.type} />
+          <source key={source.url} src={source.url} type={source.type} />
         ) : (
           <source key={source.url} src={source.url} type={source.type} />
         ),
