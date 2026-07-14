@@ -61,7 +61,7 @@ export function VideoScreen() {
           muted
           loop
           playsInline
-          preload="none"
+          // preload="none"
           poster="/placeholders/borders_placeholder.webp"
         >
           <source data-deferred-src="/videos/02_borders_v9.webm" type="video/webm; codecs=vp9" />

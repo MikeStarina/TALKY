@@ -41,7 +41,7 @@ export function InvisibleScreen() {
           muted
           loop
           playsInline
-          preload="none"
+          // preload="none"
           poster="/placeholders/lamps_test_placeholder.webp"
         >
           <source data-deferred-src="/videos/03_lamps_h265.mp4" type="video/mp4; codecs=hvc1" />

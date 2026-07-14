@@ -33,7 +33,7 @@ export function SupportScreen() {
             muted
             loop
             playsInline
-            preload="none"
+            // preload="none"
             poster="/placeholders/24_h_v2_placeholder.avif"
           >
             <source data-deferred-src="/videos/04_hours_av1_mobile.mp4" type="video/mp4" media="(max-width: 1024px)" />
