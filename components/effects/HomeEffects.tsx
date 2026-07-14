@@ -8,10 +8,10 @@ import {
   initHeroWaterfallMobileSourceSwap,
   initHeroWaterfallPlaceholder,
 } from '@/lib/effects/heroWaterfallPlaceholder';
-import { initInvisibleScreenCardGradient } from '@/lib/effects/invisibleScreenCardGradient';
+// import { initInvisibleScreenCardGradient } from '@/lib/effects/invisibleScreenCardGradient';
 import { initPurchaseButtonSpotlight } from '@/lib/effects/purchaseButtonSpotlight';
-import { initVideoSecondaryDeferredLoad } from '@/lib/effects/videoSecondaryDeferredLoad';
-import { initVideoMainViewportVolume } from '@/lib/effects/videoMainViewportVolume';
+// import { initVideoSecondaryDeferredLoad } from '@/lib/effects/videoSecondaryDeferredLoad';
+// import { initVideoMainViewportVolume } from '@/lib/effects/videoMainViewportVolume';
 import { initVideoVisibilityPlayback } from '@/lib/effects/videoVisibilityPlayback';
 
 /** Client-only wiring for the homepage, mirrors the previous `src/index.ts` entry. */
@@ -23,13 +23,13 @@ export function HomeEffects() {
     // real current datetime in header
     initHeaderDatetime();
     // less important videos load controller
-    initVideoSecondaryDeferredLoad();
+    // initVideoSecondaryDeferredLoad();
     // play/pause decorative videos by viewport; tab refresh via unobserve/observe
     initVideoVisibilityPlayback();
     // volume controller for video main viewport
-    initVideoMainViewportVolume();
+    // initVideoMainViewportVolume();
     // invisible screen cards gradients animation controller
-    initInvisibleScreenCardGradient();
+    // initInvisibleScreenCardGradient();
     // teleprompter demo
     initFeaturesScreenTeleprompter();
     // purchase button animation controller
