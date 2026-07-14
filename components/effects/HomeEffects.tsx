@@ -10,7 +10,7 @@ import {
 } from '@/lib/effects/heroWaterfallPlaceholder';
 // import { initInvisibleScreenCardGradient } from '@/lib/effects/invisibleScreenCardGradient';
 import { initPurchaseButtonSpotlight } from '@/lib/effects/purchaseButtonSpotlight';
-// import { initVideoSecondaryDeferredLoad } from '@/lib/effects/videoSecondaryDeferredLoad';
+import { initVideoSecondaryDeferredLoad } from '@/lib/effects/videoSecondaryDeferredLoad';
 // import { initVideoMainViewportVolume } from '@/lib/effects/videoMainViewportVolume';
 import { initVideoVisibilityPlayback } from '@/lib/effects/videoVisibilityPlayback';
 
