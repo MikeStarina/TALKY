@@ -44,9 +44,9 @@ export function InvisibleScreen() {
           // preload="none"
           poster="/placeholders/lamps_test_placeholder.webp"
         >
-          <source data-deferred-src="/videos/03_lamps_h265.mp4" type="video/mp4; codecs=hvc1" />
-          <source data-deferred-src="/videos/03_lamps_av1.mp4" type="video/mp4; codecs=av01.0.05M.08" />
-          <source data-deferred-src="/videos/03_lamps_v9.webm" type="video/webm" />
+          <source src="/videos/03_lamps_h265.mp4" type="video/mp4; codecs=hvc1" />
+          <source src="/videos/03_lamps_av1.mp4" type="video/mp4; codecs=av01.0.05M.08" />
+          <source src="/videos/03_lamps_v9.webm" type="video/webm" />
         </video>
       </div>
       <div className="invisibleScreen__info">

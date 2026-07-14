@@ -36,12 +36,12 @@ export function SupportScreen() {
             // preload="none"
             poster="/placeholders/24_h_v2_placeholder.avif"
           >
-            <source data-deferred-src="/videos/04_hours_av1_mobile.mp4" type="video/mp4" media="(max-width: 1024px)" />
-            <source data-deferred-src="/videos/04_hours_h265_mobile.mp4" type="video/mp4" media="(max-width: 1024px)" />
-            <source data-deferred-src="/videos/04_hours_v9_mobile.webm" type="video/webm" media="(max-width: 1024px)" />
-            <source data-deferred-src="/videos/04_hours_av1.mp4" type="video/mp4" />
-            <source data-deferred-src="/videos/04_hours_h265.mp4" type="video/mp4" />
-            <source data-deferred-src="/videos/04_hours_v9.webm" type="video/webm" />
+            <source src="/videos/04_hours_av1_mobile.mp4" type="video/mp4" media="(max-width: 1024px)" />
+            <source src="/videos/04_hours_h265_mobile.mp4" type="video/mp4" media="(max-width: 1024px)" />
+            <source src="/videos/04_hours_v9_mobile.webm" type="video/webm" media="(max-width: 1024px)" />
+            <source src="/videos/04_hours_av1.mp4" type="video/mp4" />
+            <source src="/videos/04_hours_h265.mp4" type="video/mp4" />
+            <source src="/videos/04_hours_v9.webm" type="video/webm" />
           </video>
         </div>
       </div>

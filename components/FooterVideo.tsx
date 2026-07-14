@@ -19,7 +19,7 @@ export function FooterVideo({ deferred = false }: { deferred?: boolean }) {
     >
       {sources.map((source) =>
         deferred ? (
-          <source key={source.url} data-deferred-src={source.url} type={source.type} />
+          <source key={source.url} src={source.url} type={source.type} />
         ) : (
           <source key={source.url} src={source.url} type={source.type} />
         ),
