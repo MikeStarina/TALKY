@@ -160,6 +160,9 @@
     position: relative;
     overflow: hidden;
     transition: transform 0.15s ease-in-out;
+    /* Safari fails to clip blurred children (glare) to the rounded overflow:hidden box;
+       forcing a mask makes it use the GPU clip path instead. */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
 .pricingScreen__card:hover {

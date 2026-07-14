@@ -8,7 +8,7 @@ import { verifyDownloadToken } from '@/lib/stripe/downloadToken';
 
 function resolveDownloadFilePath() {
   const assetsRoot = path.resolve(process.cwd(), 'assets');
-  const relativePath = process.env.TALKY_DOWNLOAD_FILE ?? 'TalkY.dmg';
+  const relativePath = process.env.TALKY_DOWNLOAD_FILE ?? 'Talky.dmg';
   const absoluteFilePath = path.resolve(assetsRoot, relativePath);
 
   const isInsideAssets = absoluteFilePath === assetsRoot || absoluteFilePath.startsWith(`${assetsRoot}${path.sep}`);
