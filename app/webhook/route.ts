@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { getStripeClient, getStripePriceId } from '@/lib/stripe/checkout';
+import { trackTikTokEvent } from '@/lib/tiktok/events';
 
 export const runtime = 'nodejs';
 
 const stripe = getStripeClient();
 const stripePriceId = getStripePriceId();
 const stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+const appUrl = process.env.NEXT_PUBLIC_APP_URL;
 
 type LogLevel = 'info' | 'warn' | 'error';
 
@@ -46,6 +48,16 @@ function logWebhook(level: LogLevel, resultCode: string, payload: WebhookLogPayl
   logger('[StripeWebhook]', JSON.stringify({ resultCode, ...payload }));
 }
 
+function trackCompletePayment(session: Stripe.Checkout.Session) {
+  void trackTikTokEvent({
+    event: 'CompletePayment',
+    eventId: `purchase_${session.id}`,
+    email: session.customer_details?.email,
+    orderId: session.id,
+    url: appUrl ? `${appUrl}/thanks88` : null,
+  });
+}
+
 export async function POST(request: NextRequest) {
   if (!stripe || !stripePriceId || !stripeWebhookSecret) {
     logWebhook('warn', 'webhook_not_configured', {
@@ -83,6 +95,7 @@ export async function POST(request: NextRequest) {
 
         if (session.payment_status === 'paid') {
           logWebhook('info', 'payment_confirmed', { ...meta, priceMatched });
+          trackCompletePayment(session);
         } else {
           logWebhook('info', 'checkout_completed_pending_payment', { ...meta, priceMatched });
         }
@@ -100,6 +113,7 @@ export async function POST(request: NextRequest) {
         }
 
         logWebhook('info', 'payment_confirmed_async', { ...meta, priceMatched });
+        trackCompletePayment(session);
         break;
       }
 

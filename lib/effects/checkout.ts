@@ -1,4 +1,46 @@
 /** Stripe Checkout: POST to the Next.js API route (`/api/checkout/session`). */
+
+declare global {
+  interface Window {
+    ttq?: {
+      track: (
+        event: string,
+        params?: Record<string, unknown>,
+        options?: { event_id?: string },
+      ) => void;
+    };
+  }
+}
+
+const INITIATE_CHECKOUT_PARAMS = {
+  content_type: 'product',
+  content_id: 'talky',
+  content_name: 'TalkY',
+  value: 24.5,
+  currency: 'USD',
+  contents: [
+    {
+      content_id: 'talky',
+      content_name: 'TalkY',
+      content_type: 'product',
+      quantity: 1,
+      price: 24.5,
+    },
+  ],
+};
+
+function trackInitiateCheckoutPixel(eventId?: string) {
+  try {
+    window.ttq?.track(
+      'InitiateCheckout',
+      INITIATE_CHECKOUT_PARAMS,
+      eventId ? { event_id: eventId } : undefined,
+    );
+  } catch {
+    // Analytics must never block checkout.
+  }
+}
+
 async function startCheckout(): Promise<void> {
   let res: Response;
   try {
@@ -11,9 +53,9 @@ async function startCheckout(): Promise<void> {
     return;
   }
 
-  let data: { url?: string; error?: string };
+  let data: { url?: string; error?: string; eventId?: string };
   try {
-    data = (await res.json()) as { url?: string; error?: string };
+    data = (await res.json()) as { url?: string; error?: string; eventId?: string };
   } catch {
     window.alert('Unexpected response from server.');
     return;
@@ -24,6 +66,7 @@ async function startCheckout(): Promise<void> {
     return;
   }
   if (data.url) {
+    trackInitiateCheckoutPixel(data.eventId);
     window.location.assign(data.url);
     return;
   }

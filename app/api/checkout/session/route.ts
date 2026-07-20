@@ -1,7 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import Stripe from 'stripe';
 import { findPaidSessionForCustomer, getStripeClient, getStripePriceId } from '@/lib/stripe/checkout';
+import { createTikTokEventId, getClientIp, trackTikTokEvent } from '@/lib/tiktok/events';
 
 const appUrl = process.env.NEXT_PUBLIC_APP_URL;
 const stripe = getStripeClient();
@@ -30,7 +31,7 @@ function withCustomerCookie(response: NextResponse, customerId: string) {
   });
 }
 
-export async function POST() {
+export async function POST(request: NextRequest) {
   if (!stripe || !stripePriceId || !appUrl) {
     return NextResponse.json({ error: 'Stripe is not configured on the server' }, { status: 500 });
   }
@@ -95,7 +96,18 @@ export async function POST() {
       return NextResponse.json({ error: 'Stripe did not return a checkout URL' }, { status: 500 });
     }
 
-    const response = NextResponse.json({ url: session.url });
+    const eventId = createTikTokEventId(`checkout_${session.id}`);
+    void trackTikTokEvent({
+      event: 'InitiateCheckout',
+      eventId,
+      ip: getClientIp(request.headers),
+      userAgent: request.headers.get('user-agent'),
+      ttp: cookieStore.get('_ttp')?.value,
+      ttclid: cookieStore.get('ttclid')?.value,
+      url: appUrl,
+    });
+
+    const response = NextResponse.json({ url: session.url, eventId });
     withCustomerCookie(response, customerId);
     return response;
   } catch (error) {
