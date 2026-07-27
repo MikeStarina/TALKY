@@ -22,6 +22,7 @@ export const viewport: Viewport = {
 
 const YANDEX_METRIKA_ID = 109306318;
 const TIKTOK_PIXEL_ID = 'D9ETPURC77UE4ULOM10G';
+const GA_MEASUREMENT_ID = 'G-HRHBCZHSFJ';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -42,6 +43,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         {children}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
         <Script id="yandex-metrika" strategy="afterInteractive">
           {`
             (function (m, e, t, r, i, k, a) {
