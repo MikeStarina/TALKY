@@ -111,7 +111,7 @@ export default async function Thanks88Page({
         </div>
       </ThanksPageFooter>
       <FooterVideo />
-      <ThanksEffects />
+      <ThanksEffects purchased={Boolean(downloadHref)} orderId={sessionId} />
     </div>
   );
 }

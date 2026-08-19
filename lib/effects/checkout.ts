@@ -9,6 +9,12 @@ declare global {
         options?: { event_id?: string },
       ) => void;
     };
+    fbq?: (
+      command: string,
+      event: string,
+      params?: Record<string, unknown>,
+      options?: { eventID?: string },
+    ) => void;
   }
 }
 
@@ -29,12 +35,34 @@ const INITIATE_CHECKOUT_PARAMS = {
   ],
 };
 
+const META_INITIATE_CHECKOUT_PARAMS = {
+  content_type: 'product',
+  content_ids: ['talky'],
+  content_name: 'TalkY',
+  value: 24.5,
+  currency: 'USD',
+  num_items: 1,
+  contents: [{ id: 'talky', quantity: 1, item_price: 24.5 }],
+};
+
 function trackInitiateCheckoutPixel(eventId?: string) {
+  // Each pixel gets its own try/catch so one broken vendor cannot block the redirect.
   try {
     window.ttq?.track(
       'InitiateCheckout',
       INITIATE_CHECKOUT_PARAMS,
       eventId ? { event_id: eventId } : undefined,
+    );
+  } catch {
+    // Analytics must never block checkout.
+  }
+
+  try {
+    window.fbq?.(
+      'track',
+      'InitiateCheckout',
+      META_INITIATE_CHECKOUT_PARAMS,
+      eventId ? { eventID: eventId } : undefined,
     );
   } catch {
     // Analytics must never block checkout.
